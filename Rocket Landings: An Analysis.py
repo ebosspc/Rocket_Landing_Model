@@ -2,7 +2,8 @@
 """
 Rocket Landings: An Analysis
 @authors: Ethan Francolla, Dr. Matthew Sartucci
-6/1/2021
+Created in Anaconda Sypder and VS Code
+6/1/2021-present
 """
 
 
