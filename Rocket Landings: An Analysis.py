@@ -52,18 +52,35 @@ at termial velocity, which is stored as its own variable throughout different
 sections of the code
 '''
 
-import math #Library for mathematical functions
-import matplotlib #Library for plotting functions
-import matplotlib.pyplot as plt #Library for plotting functions
+#Import math ibrary for mathematical functions used in air resistance calculations
+import math
 
-#Setting variables
-dt = 1 # 1 second incrememnt
-cutoff = 120 #How long engines will burn before stopping
-g= 9.81 # acceleration due to gravity in m/s^2
-#acc = 35
-theta = 45 #angle from horizontal
-y = [0] #creating a blank array as we will want to store y throughout model
-vy=[0] #creating a blank array as we will want to store vy throughout model
+#Import matplotlib for plotting functions and plots
+#These libraries come default on Anaconda, but other users may have to install these modules manually
+import matplotlib
+
+#Set matplotlib function header
+import matplotlib.pyplot as plt
+
+#Define starting variables of the rocket
+# This code will function in one second incrememtns to record datasecond
+dt = 1
+
+#How long engines will burn after takeoff before turning off in seconds
+cutoff = 120 #120 second burn time
+
+#Acceleration due to gravity in m/s^2
+g= 9.81
+
+#Angle from horionztal that rocket engines will thrust in
+theta = 45 #45 degrees aboe the horizontal
+
+#Define an empty array to store y values as the model runs
+y = [0]
+
+#Define a blank array to store vy values throughout the model
+vy=[0]
+
 t = [0] #Create empty array t to store differnt time values
 time= 0
 vyi = 0
