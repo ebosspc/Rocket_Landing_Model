@@ -93,27 +93,35 @@ wm = 3000000 #Wet Mass of the rocket at liftoff
 A = 630 # cross section area of the rocket while it is "belly-flopping"
 Cd = 1.18 #Drag coefficient
 
-#Calcualte the acceleration of the rocket
+#Calculate the acceleration of the rocket
 accy= (30*F)/(wm) #Calcualted acceleration of a rocket burning 30 raptor engines
 
-#For Loop describing engine accelerating and then cutting off at time t=8
-for i in range(1,600):
-    if i==cutoff: #sets acceleration to 0 during engine cutoff
-        accy =0
+#For Loop describing engine accelerating and then cutting off at time determined by the cutoff variable
+for i in range(1,600): #Max range is set to 600 simply to ensure the for loop doesn't end prematurely
+    #Check if the engine has cut off, and if so, update the acceleration
+    if i == cutoff: #sets acceleration to 0 during engine cutoff
+        accy = 0
+        
+    #Proceed as normal if engines are still burning
+    #Define velccity and height using the kinematic equations
     vyf= vyi + (accy-g)*dt
     yf = yi + vyf*dt + (1/2)*(accy-g)*dt**2
+    
+    #Add the new velocity and position values to their respective arrays to be tracked
     y.append(yf)
     vy.append(vyf)
+    
+    #Add a second to the time tracker to calcualte values in the next second in the next iteration of the for loop
     time = time+1
-    t.append(time) #typo????? there is no array t
+    t.append(time)
+    
+    #Update the newly calcualted position and velocity values to be the new inputs in the next iteration of the for loop
     vyi = vyf
-    yi = yf   
-    if vyf<0: #Break loop if velocity goes below 0
+    yi = yf
+    
+    #When the velcotity of the rcoket goes below 0 break the loop and move on to the next part of the model
+    if vyf<0:
         break
-
-
-
-
 
 
 '''
