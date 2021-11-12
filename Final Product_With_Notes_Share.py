@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jul 27 17:41:46 2021
-2
-@author: Ethan Francolla
+Rocket Landings: An Analysis
+@authors: Ethan Francolla, Dr. Matthew Sartucci
+6/1/2021
 """
 
 
