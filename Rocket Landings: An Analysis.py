@@ -99,11 +99,11 @@ accy= (30*F)/(wm) #Calcualted acceleration of a rocket burning 30 raptor engines
 #For Loop describing engine accelerating and then cutting off at time determined by the cutoff variable
 for i in range(1,600): #Max range is set to 600 simply to ensure the for loop doesn't end prematurely
     #Check if the engine has cut off, and if so, update the acceleration
-    if i == cutoff: #sets acceleration to 0 during engine cutoff
+    if i == cutoff:
+        #sets acceleration to 0 during engine cutoff
         accy = 0
-        
-    #Proceed as normal if engines are still burning
-    #Define velccity and height using the kinematic equations
+    
+    #Define velocity and height using the kinematic equations
     vyf= vyi + (accy-g)*dt
     yf = yi + vyf*dt + (1/2)*(accy-g)*dt**2
     
@@ -111,7 +111,7 @@ for i in range(1,600): #Max range is set to 600 simply to ensure the for loop do
     y.append(yf)
     vy.append(vyf)
     
-    #Add a second to the time tracker to calcualte values in the next second in the next iteration of the for loop
+    #Add a second to the time tracker to calculate values in the next second in the next iteration of the for loop
     time = time+1
     t.append(time)
     
