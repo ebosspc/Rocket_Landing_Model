@@ -144,32 +144,62 @@ yin = yi
 #vt= math.sqrt((2*dm*g)/(ro*A*Cd)) #Terminal Velocity will be this value
 
 #Define necessary values to calculate air resistance
+
+#Define the air pressure
 p0 = 101325 #Pressure at sea level (Pa)
+
+#Define the temperature
 T0 = 220 #Temperature at sea level (K)
+
+#Define the Temperature lapse rate
 L = 0 #Temperature lapse rate (K/m)
+
+#Define the ideal gas constant
 R = 8.31446 #Ideal gas constant J/(mol*K)
+
+#Define the molar mass of the air
 M = 0.0289652 #Molar mass of dry air (kg/mol)
 
+#For loop to calculate air resistance
 for i in range(10000):
     #three conditions below for calculating the drag acceleration 
     #depends on height. The first condition is for the troposphere (<10km)
-    #the second condition is for the tropopause (constant temp, 10km to 20km)
+    #the second condition is for the troposphere (constant temp, 10km to 20km)
     #the third condition is above the stratosphere. We're simplifying out assumptions to say no drag above that point
-    if yin<10000: #if condition set to go off if the heigh is less than 10000
+    
+    #Check if the rocket is near sea level and use the appropirate equations
+    if yin < 10000: #if condition set to go off if the height is less than 10000
+        #Redefine approximate temperature and temperature lapse rate at this altitude
         L=0.0065
         T0=288.15
+        
+        #Calcualte ro using inputted values
         const = (p0*M)/(R*T0)
         exp = ((g*M)/(R*L))-1
         arg = 1-(L*yin/T0)
         ro = const*(arg**exp)
+        
+        #Calculate drag on rocket
         dragy = (0.5)*ro*(vyin**2)*Cd*A/dm
-    elif 10000<=yin<=20000: #if condition if the height is between 10000-20000
+        
+    #Check if the rocket is in the statosphere and use the appropriate equations
+    elif 10000 <= yin <= 20000: #if condition if the height is between 10000-20000 meters
+        #Calculate ro using the inputted values
         p = p0*math.exp(-g*M*yin/(R*T0))
         ro = (p*M)/(R*T0)
+        
+        #Calculate the drag on the rocket
         dragy = (0.5)*ro*(vyin**2)*Cd*A/dm
-    elif yin>20000: #if condition 
+    
+    #Check if the rocket is above the stratosphere and use the appropriate equations
+    elif yin > 20000: #If condition set to go off of the altitude is above 20000 meters 
+        #Set the drag on the rocket to 0 since any air resistacne it expereinces above this point can be considered negligable
         dragy=0
+        
+    #Calculate new velocity, accounting for the air resistance on the rocket
     vyf= vyin + (dragy-g)*dt
+    
+    #Calculate new position, acounting for the 
     yf = yin + vyf*dt + (1/2)*(dragy-g)*dt**2
     y.append(yf)
     vy.append(vyf)
